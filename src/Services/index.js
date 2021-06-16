@@ -2,39 +2,39 @@
 import axios from 'axios';
 import { CheckNet } from '../Utils/CommonFun/index'
 //for host & Apis url
-import Config from '../../src/Utils/Config';
+// import Config from '../../src/Utils/Config';
 let NoNet = new Error("No internet connection.");
 
 
 export default class Api {
-    constructor(name) {
-      this._name = name;
-    }
-  }//end of class
+  constructor(name) {
+    this._name = name;
+  }
+}//end of class
 
 
 
 
 export const callGetRestApis = async (URL) => {
-    let Conn = CheckNet();
-    if (!Conn) { throw NoNet } else {
-      console.log('url callGetRestApis ', URL);
-      return axios(URL).then((res) => {
-        console.log("callGetRestApis res", res);
-        return res.data ? res.data : res;
-      })
-        .catch((err) => {
-          console.log(".catch((err) callGetRestApis", err);
-          handleErrors(err);
-        });
-    }
-  };
-
-  
+  let Conn = CheckNet();
+  if (!Conn) { throw NoNet } else {
+    console.log('url callGetRestApis ', URL);
+    return axios(URL).then((res) => {
+      console.log("callGetRestApis res", res);
+      return res.data ? res.data : res;
+    })
+      .catch((err) => {
+        console.log(".catch((err) callGetRestApis", err);
+        handleErrors(err);
+      });
+  }
+};
 
 
 
-  
+
+
+
 
 
 
@@ -45,7 +45,7 @@ export const callGetRestApis = async (URL) => {
 //     console.log('Api token => ' + token)
 //     let Conn = await CheckNet();
 //     if (!Conn) { throw 'No internet connection.' } else {
-  
+
 //       let authOptions = {
 //         method: "POST",
 //         mode: "cors",

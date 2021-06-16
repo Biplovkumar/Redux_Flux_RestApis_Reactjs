@@ -4,7 +4,7 @@ import Config from '../../Utils/Config'
 
 
 const Home = (props) => {
-    const [data, setData] = useState('')
+    const [data, setData] = useState([])
     const Movies = [
         { id: 1, name: 'Reservoir Dogs' },
         { id: 2, name: 'Airplane' },
@@ -15,10 +15,6 @@ const Home = (props) => {
         { id: 7, name: 'Seven' },
         { id: 8, name: 'The Seven Samurai' }
     ];
-    useEffect(() => {
-        callApi()
-    }, [])
-
 
     const callApi = async () => {
         await callGetRestApis(Config.users)
@@ -32,6 +28,11 @@ const Home = (props) => {
             })
     }
 
+    useEffect(() => { callApi() }, [])
+
+    // useEffect(callApi, [])
+
+
     const Item = (item) => { return (<div> <li key={item.id}> {item.name}</li> </div>) }
 
     const MoviesList = (Movies) => { return (<div><ul>{Movies.map(val => (Item(val)))} </ul> </div>) }
@@ -43,7 +44,7 @@ const Home = (props) => {
     return (
         <>
             <div> <h1>Home...</h1> </div>
-            {data && data != '' ? <div> {MoviesList(data)} </div>: null}
+            {data && data !== '' ? <div> {MoviesList(data)} </div> : null}
         </>
     )
 }
