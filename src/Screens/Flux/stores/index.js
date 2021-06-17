@@ -3,7 +3,7 @@ import  AppDispatcher  from '../Dispatcher';
 
 var Store = {
     value: 0,
-
+    bip:[],
     listeners: [], // list of listening objects
     callbacks: [], // list of methods that should be called on those objects (as strings)
 
@@ -12,12 +12,12 @@ var Store = {
     },
 
     getValue: function () {
-
-       console.log("this.value",this.value)
-
         return this.value;
     },
 
+    getData: function () {
+         return this.bip;
+     },
     bind: function (listener, callback) {
         this.listeners.push(listener);
         this.callbacks.push(callback);
@@ -50,6 +50,9 @@ AppDispatcher.register(function (payload) {
             Store.incrementValue();
             Store.trigger();
             break;
+        case 'SaveVal':
+                Store.bip = payload.data;
+                break;
     }
 
     return true; // needed for Flux promise resolution

@@ -1,55 +1,33 @@
-// import React from 'react';
+import React, { useEffect, useState } from "react";
+import AppDispatcher from '../Flux/Dispatcher';
+import Store from '../Flux/stores';
 
-// const About = () => {
-import React from 'react'
-import  AppDispatcher  from '../Flux/Dispatcher';
-import  Store  from '../Flux/stores';
+const About = (props) => {
+   const [data, setData] = useState([{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '52' }])
 
-class About extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            value: 0,
-            bip:[{id:'1'},{id:'2'},{id:'3'},{id:'4'},{id:'5'}],
+   useEffect(() => {
+      getNewData()
+   }, [])
 
-        }
-    }
 
-    componentDidMount() {
-        Store.bind(this, 'incremented');
-    }
+   const getNewData = () => {
+      console.log('Biplov', Store.getData());
+   }
 
-    componentWillUnmount() {
-        Store.unbind(this, 'incremented');
-    }
 
-    incremented() {
-        this.setState({
-            value: Store.getValue()
-        })
-    }
-
-    handleClick() {
+   const handleClick = () => {
       AppDispatcher.dispatch({
-            eventName: 'increment'
-        });
-    }
+         eventName: 'SaveVal', data: data
+      });
+   }
 
-    render() {
-        var value = this.state.value ? this.state.value : 0;
-        return <div>
-            <p>{value}</p>
-            <button onClick={this.handleClick}>Increment</button>
-        </div>;
-    }
+   console.log(' Store.getData()', data, Store.getData());
+   return (
+      <div>
+         <button onClick={handleClick()}>Save flux Data</button>
+      </div>
+   )
 }
 
-export default About;
 
-//   return (
-//           <div>
-//              <h1>About...</h1>
-//           </div>
-//        )
-//     }
-//  export default About;
+export default About;
