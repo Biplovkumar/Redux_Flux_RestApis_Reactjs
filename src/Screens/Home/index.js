@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { callGetRestApis } from "../../Services/index";
 import Config from '../../Utils/Config'
+import { useDispatch, useSelector } from 'react-redux'
+import Type from '../../Redux/ActionTypes/Index'
 
 
 const Home = (props) => {
@@ -16,15 +18,22 @@ const Home = (props) => {
         { id: 8, name: 'The Seven Samurai' }
     ];
 
+
+    const dispatch = useDispatch()
+
+    useSelector(S => { console.log('Saved data', S); })
+
     const callApi = async () => {
         await callGetRestApis(Config.users)
             .then((res) => {
                 setData(res)
                 console.log('callApi res :- ', res)
+                dispatch({ type: Type.Login, data: res })
             })
             .catch((error) => {
                 console.log('callApi error :- ', error)
                 setData(Movies)
+                dispatch({ type: Type.Login, data: Movies })
             })
     }
 
