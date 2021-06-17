@@ -23,9 +23,12 @@ const About = (props) => {
 
    console.log(' Store.getData()', data, Store.getData());
    return (
+      <>
+      <div> <h1>About...</h1> </div>
       <div>
          <button onClick={handleClick()}>Save flux Data</button>
       </div>
+      </>
    )
 }
 
