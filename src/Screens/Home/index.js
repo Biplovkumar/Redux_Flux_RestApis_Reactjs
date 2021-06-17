@@ -21,6 +21,10 @@ const Home = (props) => {
             .then((res) => {
                 setData(res)
                 console.log('callApi res :- ', res)
+
+
+
+
             })
             .catch((error) => {
                 console.log('callApi error :- ', error)
